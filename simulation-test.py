@@ -17,23 +17,30 @@ def test_simulation_instantiation():
   assert sim.initial_infected == 1
 
 def test_create_population():
-  sim = Simulation(10, .5, 1, "test")
+  sim = Simulation(10, 0, 4, "test")
   sim._create_population
   assert sim.pop_size == 10
-  assert sim.population[0].infection == True
-  assert sim.population[1].infection == False
 
+def test_time_step():
+  sim = Simulation(20, .2, 1, "tonsils")
+  sim.time_step()
 
+def test_log_infect_surv():
+  sim = Simulation(10, 0, 4, "test")
+  sim.logger.log_infection_survival(sim.get_random_person(), True)
 
+def test_get_random_person():
+  sim = Simulation(10, 0, 4, "test")
+  print(sim.get_random_person())
 
 # ------- RUN TESTS ------------ #
 if __name__ == "__main__":
-  test_virus_instantiation()
+  # test_virus_instantiation()
   test_simulation_instantiation()
-  test_create_population()
-
-
-
+  # test_create_population()
+  # test_time_step()
+  test_log_infect_surv()
+  # test_get_random_person()
 
 
 
