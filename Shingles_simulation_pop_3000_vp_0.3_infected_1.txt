@@ -1,0 +1,26 @@
+Virus: Shingles, Population: 3000, Percent Vaccinated:0.3, Reproduction Rate: 0.1 Mortality Rate: 0.5
+
+Step: 0
+Alive: 3000
+Infected: 1
+Dead: 0
+Vaccinated: 0.3%
+
+Step: 1
+Alive: 2995
+Infected: 12
+Dead: 5
+Vaccinated: 0.3%
+
+Step: 2
+Alive: 2933
+Infected: 119
+Dead: 67
+Vaccinated: 0.31%
+
+Step: 3
+Alive: 2340
+Infected: 1268
+Dead: 660
+Vaccinated: 0.43%
+

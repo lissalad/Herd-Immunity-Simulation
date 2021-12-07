@@ -6,13 +6,18 @@ class Logger(object):
 
     def write_metadata(self, pop_size, vacc_percentage, virus_name, mortality_rate,
                        basic_repro_num):
-      log = open("log.txt", "w")
+      log = open(self.file_name, "w")
       log.write(f"Virus: {virus_name}, Population: {pop_size}, Percent Vaccinated:{vacc_percentage}, Reproduction Rate: {basic_repro_num} Mortality Rate: {mortality_rate}\n\n")
+      log.close()
+
+    def log_step(self, alive, infected, died, step, vacc_percent):
+      log = open(self.file_name, 'a')
+      log.write(f"Step: {step}\nAlive: {alive}\nInfected: {infected}\nDead: {died}\nVaccinated: {vacc_percent}%\n\n")
       log.close()
 
     def log_interaction(self, person, random_person, random_person_sick=None,
                         random_person_vacc=None, did_infect=None):
-        log = open("log.txt", "a")
+        log = open(self.file_name, "a")
         if did_infect:
           log.write(f"{person._id} infects {random_person._id} \n")
         else:
@@ -24,13 +29,12 @@ class Logger(object):
 
 
     def log_infection_survival(self, person, did_die_from_infection):
-      log = open("log.txt", "a")
+      log = open(self.file_name, "a")
       if did_die_from_infection:
          log.write(f"{person._id} died from infection.\n")
       else:
         log.write(f"{person._id} survived the infection.\n")
       log.close()
-
 
 
 
