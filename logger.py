@@ -4,16 +4,18 @@ class Logger(object):
       self.file_name = file_name
       # print('logger init!')
 
-    def write_metadata(self, pop_size, vacc_percentage, virus_name, mortality_rate,
-                       basic_repro_num):
+    def write_metadata(self, pop_size, vacc_percentage, virus_name, mortality_rate, repro_rate):
       log = open(self.file_name, "w")
-      log.write(f"Virus: {virus_name}, Population: {pop_size}, Percent Vaccinated:{vacc_percentage}, Reproduction Rate: {basic_repro_num} Mortality Rate: {mortality_rate}\n\n")
+      log.write(f"Virus: {virus_name}, Population: {pop_size}, Percent Vaccinated:{vacc_percentage}, Mortality Rate: {mortality_rate}, Reproduction Rate: {repro_rate}\n\n")
       log.close()
 
     def log_step(self, alive, infected, died, step, vacc_percent):
       log = open(self.file_name, 'a')
-      log.write(f"Step: {step}\nAlive: {alive}\nInfected: {infected}\nDead: {died}\nVaccinated: {vacc_percent}%\n\n")
+      log.write(f"Step: {step}\nAlive: {alive}\nDead: {died}\nInfected: {infected}\nVaccinated: {vacc_percent}\n\n")
       log.close()
+
+
+# ----------------------------------------------------------------------- #
 
     def log_interaction(self, person, random_person, random_person_sick=None,
                         random_person_vacc=None, did_infect=None):

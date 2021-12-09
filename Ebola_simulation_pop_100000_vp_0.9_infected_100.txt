@@ -1,0 +1,32 @@
+Virus: Ebola, Population: 100000, Percent Vaccinated:0.9, Mortality Rate: 0.7, Reproduction Rate: 0.25
+
+Step: 0
+Alive: 100000
+Dead: 0
+Infected: 100
+Vaccinated: 0.9
+
+Step: 1
+Alive: 98362
+Dead: 1638
+Infected: 2387
+Vaccinated: 0.9
+
+Step: 2
+Alive: 94480
+Dead: 5520
+Infected: 5581
+Vaccinated: 0.92
+
+Step: 3
+Alive: 93167
+Dead: 6833
+Infected: 1823
+Vaccinated: 0.98
+
+Step: 4
+Alive: 93049
+Dead: 6951
+Infected: 190
+Vaccinated: 1.0
+
