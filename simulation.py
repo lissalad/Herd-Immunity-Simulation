@@ -5,6 +5,8 @@ from person import Person
 from logger import Logger
 from virus import Virus
 
+# -------------- TO RUN --------------------- #
+# python3 simulation.py ebola .25 .7 10000 ebola
 
 class Simulation: # RAN IMMEDIATELY
     def __init__(self, pop_size, vacc_percentage, virus, initial_infected=1):
@@ -23,7 +25,7 @@ class Simulation: # RAN IMMEDIATELY
 
   # ------------ COUNTS -------------------------------- #
         self.alive = pop_size
-        self.total_dead = 0 
+        self.dead = 0 
         self.infected = initial_infected
         self.vaxxed = initial_infected
 
@@ -44,14 +46,14 @@ class Simulation: # RAN IMMEDIATELY
 
 
       print(f'The simulation has ended after {self.time_step_counter} turns.'.format(self.time_step_counter))
-      print(f"Survivors: {self.alive}\nDead: {self.total_dead} ")       
+      print(f"Survivors: {self.alive}\nDead: {self.dead} ")       
 
 # -------------------------------------------------- #
     def get_vacc_percentage(self):
 
       # print(living)
       # print(self.alive)
-      # print(self.total_dead)
+      # print(self.dead)
       # print(self.infected)
       # print(self.vaxxed)
       # print()
@@ -65,7 +67,7 @@ class Simulation: # RAN IMMEDIATELY
     def log_step(self):
       # print('going')
       self.logger.log_step(self.alive, self.infected,
-        self.total_dead, self.time_step_counter,self.vacc_percentage)
+        self.dead, self.time_step_counter,self.vacc_percentage)
 
 # -------------------------------------------------- #
     def time_step(self):
@@ -100,7 +102,7 @@ class Simulation: # RAN IMMEDIATELY
 
 # -------------------------------------------------- #
     def _simulation_should_continue(self):
-      if self.total_dead >= self.pop_size or self.vacc_percentage>=.99 or self.infected <= 0:
+      if self.dead >= self.pop_size or self.vacc_percentage>=.99 or self.infected <= 0:
         return False
       return True
 
@@ -151,10 +153,10 @@ class Simulation: # RAN IMMEDIATELY
     def infected_survives(self, person):
       chance = random.uniform(0,1)
       if chance <= self.virus.mortality_rate:
-        self.total_dead += 1
+        self.dead += 1
         self.alive -= 1
         person.is_alive == False
-        # print(self.total_dead)
+        # print(self.dead)
       else:
         person.is_vaccinated = True
         self.vaxxed+=1
@@ -166,26 +168,27 @@ class Simulation: # RAN IMMEDIATELY
 
 # -------------- RUNS --------------------- #
 if __name__ == "__main__":
-    # params = sys.argv[1:]
-    # virus_name = str(params[0])
-    # repro_num = float(params[1])
-    # mortality_rate = float(params[2])
+    params = sys.argv[1:]
+    virus_name = str(params[0])
+    repro_num = float(params[1])
+    mortality_rate = float(params[2])
 
-    # pop_size = int(params[3])
-    # vacc_percentage = float(params[4])
+    pop_size = int(params[3])
+    vacc_percentage = float(params[4])
 
-    # if len(params) == 6:
-    #     initial_infected = int(params[5])
-    # else:
-    #     initial_infected = 1
+    if len(params) == 6:
+        initial_infected = int(params[5])
+    else:
+        initial_infected = 1
 
-
-    # virus = Virus(virus_name, repro_num, mortality_rate)
-    # sim = Simulation(pop_size, vacc_percentage, initial_infected, virus)
+    virus = Virus(virus_name, repro_num, mortality_rate)
+    sim = Simulation(pop_size, vacc_percentage, virus, initial_infected)
 
     # virus = Virus("Shingles", .1, .5)
     # sim = Simulation(3000, 0.3, virus, 1)
 
-    ebola = Virus("Ebola",.7,.25)
-    sim = Simulation(10000,.9, ebola, 100)
+    # ebola = Virus("Ebola",.7,.25)
+    # sim = Simulation(10000,.9, ebola, 100)
+
     sim.run()
+
